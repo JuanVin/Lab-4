@@ -1,0 +1,62 @@
+
+.container{
+    margin-top: 300px;
+    text-align: center;
+    font-size: medium;
+}
+.input{
+    border-radius: 2px;
+    width: 250px;
+    height: 45px;
+    margin: 10px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom-width: 1px;
+}
+.btn {
+    width: 250px;
+    margin-top: 45px;
+    margin-bottom: 40px;
+    height: 35px;
+    border-style: none;
+    border-radius: 3px;
+
+}
+.message{
+    padding: 20px;
+    width: 275px;
+    border-radius: 5px;
+    font-weight: bold;
+    margin: auto;
+}
+.warningMessage{
+    background-color: rgb(134, 134, 81);
+    color: white;
+}
+.errorMessage{
+    background-color: rgb(207, 68, 68);
+    color: white;
+}
+.successMessage{
+    background-color: rgb(137, 223, 137);
+    color: rgb(105, 105, 105);
+}
+
+input:hover{
+    border-bottom-color: black;
+}
+input:focus{
+    border-bottom-color: black;
+    transform: scale(1.1);
+}
+.btn:hover{
+    transition: 0.5s;
+    background-color: rgb(120, 120, 209);
+    transform: scale(1.1);
+}
+.btn:focus{
+    transition: 0.5s;
+    background-color: rgb(120, 120, 209);
+    transform: scale(1.1);
+}
