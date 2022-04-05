@@ -1,5 +1,6 @@
 let btn, url, param, blockBtn;
 btn = document.getElementById("btn");
+
 btn.addEventListener("click", () => {
     param = document.getElementById("param").value;
     url = "http://127.0.0.1:3000/employee/" + param;
@@ -12,8 +13,7 @@ window.onload = function() {
 }
 
 function loadTable(url) {
-    let request,
-        table,
+    let table,
         tr,
         th,
         text
@@ -22,7 +22,6 @@ function loadTable(url) {
     request = fetch(url)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             if (data.length === 0) {
                 window.alert("No se hallaron usuarios");
             } else {
@@ -36,20 +35,21 @@ function loadTable(url) {
                         if (property === 'fecha_ingreso') {
                             for (let index = 0; index < 2; index++) {
                                 th = document.createElement("th");
-                                blockBtn = document.createElement("button");
-                                blockBtn.classList.add("btn")
+                                activeBtn = document.createElement("button");
+                                activeBtn.classList.add("btn")
                                 if (index === 0) {
-                                    blockBtn.classList.add("greenBtn")
+                                    activeBtn.classList.add("greenBtn")
+                                    activeBtn.setAttribute("onclick", `updateEmployee(${ JSON.stringify(obj) })`)
                                     tr.classList.add("greenTr")
-                                    blockBtn.appendChild(document.createTextNode("Actualizar"))
+                                    activeBtn.appendChild(document.createTextNode("Actualizar"))
                                 } else {  
-                                    blockBtn.classList.add("redBtn")
-                                    blockBtn.setAttribute("onclick", `deleteEmployee(${ obj.legajo })`)
+                                    activeBtn.classList.add("redBtn")
+                                    activeBtn.setAttribute("onclick", `deleteEmployee(${ obj.legajo })`)
                                     tr.classList.add("redTr")
-                                    blockBtn.appendChild(document.createTextNode("Borrar"))
+                                    activeBtn.appendChild(document.createTextNode("Borrar"))
 
                                 }
-                                th.appendChild(blockBtn)
+                                th.appendChild(activeBtn)
                                 tr.appendChild(th)
                             }    
                         }
@@ -68,35 +68,23 @@ function clearTable(table) {
     }
 }
 
-function changeStatus(id, status) {
-    console.log(id, status)
-    if (status === "Y") status = "N"
-    else status = "Y"
-    fetch(`http://168.194.207.98:8081/tp/lista.php?action=BLOQUEAR&idUser=${id}&estado=${status}`)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.respuesta)
-            loadTable(url)
-        })
-}
 function createEmployee(){
-
     let data = {
         nombre: document.getElementById("nombre").value,
         apellido: document.getElementById("apellido").value,
         dni: document.getElementById("dni").value,
         sector: document.getElementById("sector").value,
         fecha_ingreso: document.getElementById("fecha").value,
-        activo: document.getElementById("activo").value
-    },
-    url = "http://127.0.0.1:3000/insert",
-    options = {
-        method: 'POST', // or 'PUT'
-        body: JSON.stringify(data), // data can be `string` or {object}!
-        headers:{
+        activo: document.querySelector('input[name="activo"]:checked').value
+        },
+        url = "http://127.0.0.1:3000/insert",
+        options = {
+            method: 'POST', // or 'PUT'
+            body: JSON.stringify(data), // data can be `string` or {object}!
+            headers:{
           'Content-Type': 'application/json'
+            }
         }
-    }
 
     fetch(url, options)
     .then(res => res.json())
@@ -105,19 +93,23 @@ function createEmployee(){
         console.log(response)
         loadTable("http://127.0.0.1:3000/employee/")
     })
-
-    
 }
+
+function updateEmployee(employee){
+    console.log(employee)
+}
+
 function deleteEmployee(id){
     
     let option = {
         method: 'DELETE', 
         headers:{
           'Content-Type': 'application/json'
-        }
-      }
+            }
+        },
+        url = `http://127.0.0.1:3000/delete/${id}`
     
-    fetch(`http://127.0.0.1:3000/delete/${id}`, option)
+    fetch(url, option)
     .then(res => res.json())
     .catch(error => console.log(error))
     .then(data => {
