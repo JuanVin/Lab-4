@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./styles/table.css" rel="stylesheet" type="text/css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <div class="tabla">
+                <h1>Tabla de empleados</h1>
+                <div class="search">
+                    <input type="text" class="input" name="param" id="param" placeholder="Ingrese empleado">
+                    <button class="btn" id="btn">Ingresar</button>
+                </div>
+
+                <table id="table" class="table">
+                    <tr class="head">
+                        <th>Id</th>
+                        <th>Usuario</th>
+                        <th>Bloqueado</th>
+                        <th>Apellido</th>
+                        <th>Nombre</th>
+                        <th>Bloquear/Desbloquear</th>
+                    </tr>
+                </table>
+            </div>
+            <div class="form">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="input" name="nombre" id="nombre" placeholder="Ingrese nombre">
+                <label for="apellido">Apellido:</label>
+                <input type="text" class="input" name="apellido" id="apellido" placeholder="Ingrese apellido">
+                <label for="dni">DNI:</label>
+                <input type="number" class="input" name="dni" id="dni" placeholder="Ingrese DNI">
+                <label for="sector">Sector:</label>
+                <input type="number" class="input" name="sector" id="sector" placeholder="Ingrese sector">
+                <label for="sector">Sector:</label>
+                <input type="number" class="input" name="sector" id="sector" placeholder="Ingrese sector">
+                <div class="radios">
+                    <input type="radio" id="html" name="fav_language" value="HTML">
+                    <label for="html">Activo</label><br>
+                    <input type="radio" id="css" name="fav_language" value="CSS">
+                    <label for="css">Inactivo</label><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="./script/tables.js"></script>
+</body>
+
+</html>
