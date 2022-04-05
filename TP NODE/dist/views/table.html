@@ -11,8 +11,8 @@
 
 <body>
     <div class="container">
-        <div class="wrapper">
-            <div class="tabla">
+        <div class="grid-container">
+            <div class="item1">
                 <h1>Tabla de empleados</h1>
                 <div class="search">
                     <input type="text" class="input" name="param" id="param" placeholder="Ingrese empleado">
@@ -22,15 +22,19 @@
                 <table id="table" class="table">
                     <tr class="head">
                         <th>Id</th>
-                        <th>Usuario</th>
-                        <th>Bloqueado</th>
-                        <th>Apellido</th>
                         <th>Nombre</th>
-                        <th>Bloquear/Desbloquear</th>
+                        <th>Apellido</th>
+                        <th>DNI</th>
+                        <th>Sector</th>
+                        <th>Activo/Inactivo</th>
+                        <th>Fecha ingreso</th>
+                        <th>Actualizar</th>
+                        <th>Borrar</th>
                     </tr>
                 </table>
             </div>
-            <div class="form">
+            <div class="item2">
+                <h1>Ingresar nuevo empleado</h1>
                 <label for="nombre">Nombre:</label>
                 <input type="text" class="input" name="nombre" id="nombre" placeholder="Ingrese nombre">
                 <label for="apellido">Apellido:</label>
@@ -38,15 +42,16 @@
                 <label for="dni">DNI:</label>
                 <input type="number" class="input" name="dni" id="dni" placeholder="Ingrese DNI">
                 <label for="sector">Sector:</label>
-                <input type="number" class="input" name="sector" id="sector" placeholder="Ingrese sector">
-                <label for="sector">Sector:</label>
-                <input type="number" class="input" name="sector" id="sector" placeholder="Ingrese sector">
+                <input type="text" class="input" name="sector" id="sector" placeholder="Ingrese sector">
                 <div class="radios">
-                    <input type="radio" id="html" name="fav_language" value="HTML">
-                    <label for="html">Activo</label><br>
-                    <input type="radio" id="css" name="fav_language" value="CSS">
-                    <label for="css">Inactivo</label><br>
+                    <input type="radio" id="activo" name="activo" value="1">
+                    <label for="activo">Activo</label>
+                    <input type="radio" id="activo" name="activo" value="0">
+                    <label for="inactivo">Inactivo</label>
                 </div>
+                <input type="datetime-local" id="fecha" name="trip-start"
+                min="2000-01-01" max="2025-12-31">
+                <button class="btn btn-form" onclick="createEmployee()">Cargar</button>
             </div>
         </div>
     </div>

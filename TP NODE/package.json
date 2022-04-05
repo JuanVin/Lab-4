@@ -21,6 +21,7 @@
         "@types/pg": "^8.6.5",
         "express": "^4.17.3",
         "mysql": "^2.18.1",
-        "nodemon": "^2.0.15"
+        "nodemon": "^2.0.15",
+        "package.json": "^2.0.1"
     }
 }

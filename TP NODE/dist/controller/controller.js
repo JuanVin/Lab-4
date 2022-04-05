@@ -11,7 +11,7 @@ exports.controller = {
                 return;
             }
             console.log('MySQL Connection: ', connection.threadId);
-            connection.query('SELECT * FROM employees limit 10', (err, results) => {
+            connection.query('SELECT * FROM employee limit 10', (err, results) => {
                 if (err)
                     console.error(err);
                 //console.log('User Query Results: ', results);
@@ -29,7 +29,7 @@ exports.controller = {
                 return;
             }
             console.log('MySQL Connection: ', connection.threadId);
-            connection.query('SELECT * FROM employees WHERE legajo = ?', [empId], (err, results) => {
+            connection.query('SELECT * FROM employee WHERE legajo = ?', [empId], (err, results) => {
                 if (err)
                     console.error(err);
                 connection.release();
@@ -40,6 +40,7 @@ exports.controller = {
     createEmployee: (req, res) => {
         const { apellido, nombre, dni, sector, fecha_ingreso, activo } = req.body;
         var values = [apellido, nombre, dni, sector, fecha_ingreso, activo];
+        console.log(values);
         mysqldb_1.pool.getConnection((err, connection) => {
             if (err) {
                 console.error(err);
@@ -47,7 +48,7 @@ exports.controller = {
                 return;
             }
             else {
-                let sql = 'INSERT INTO employees (apellido, nombre, dni, sector, fecha_ingreso, activo) VALUES (?, ?, ?, ?, ?, ?)';
+                let sql = 'INSERT INTO employee (apellido, nombre, dni, sector, fecha_ingreso, activo) VALUES (?, ?, ?, ?, ?, ?)';
                 connection.query(sql, values, (err, results) => {
                     if (err) {
                         console.error(err);
@@ -92,7 +93,7 @@ exports.controller = {
                 return;
             }
             console.log('MySQL Connection: ', connection.threadId);
-            connection.query('DELETE FROM articulo WHERE legajo = ?', [empId], (err, results) => {
+            connection.query('DELETE FROM employee WHERE legajo = ?', [empId], (err, results) => {
                 if (err) {
                     console.error(err);
                     res.json({ message: 'Error al eliminar un empleado' });

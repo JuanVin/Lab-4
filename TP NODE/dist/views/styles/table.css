@@ -18,7 +18,7 @@ body {
     border-radius: 5px;
 }
 
-.input {
+.input[type=text],[type=number],[type="datetime-local"] {
     width: 150px;
     height: 27px;
     padding: 5px;
@@ -45,7 +45,12 @@ body {
     transition: 0.1s;
     transform: scale(1.1);
 }
-
+.btn-form{
+    text-align: center;
+    margin-top: 10px;
+    width: 100%;
+    font-size: 15px;
+}
 th,
 td {
     padding: 10px;
@@ -66,16 +71,35 @@ table {
     background-color: #cef8c6;
 }
 
-.form {
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 10px;
+    padding: 10px;
+}
+
+.item1 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.item2 {
+    margin-left: 20px;
+    margin-top: 30px;
     width: 250px;
 }
 
-.form label {
+.item2 label {
     margin-top: 5px;
 }
 
-.form input {
+.item2 input[type=text],[type=number],[type="datetime-local"] {
     margin-top: 10px;
     margin-bottom: 5px;
     width: 100%;
+}
+.radios {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
 }

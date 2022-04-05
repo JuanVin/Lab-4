@@ -1,4 +1,3 @@
-import { rejects } from "assert"
 import { Request, Response } from "express"
 import  { pool }  from "../mysqldb"
 
@@ -11,7 +10,7 @@ export let controller = {
                 return;
             }
             console.log('MySQL Connection: ', connection.threadId);
-            connection.query('SELECT * FROM employees limit 10', (err: any, results: any) => {
+            connection.query('SELECT * FROM employee limit 10', (err: any, results: any) => {
                 if (err) console.error(err);
                 //console.log('User Query Results: ', results);
                 connection.release()
@@ -29,7 +28,7 @@ export let controller = {
                 return;
             }
             console.log('MySQL Connection: ', connection.threadId);
-            connection.query('SELECT * FROM employees WHERE legajo = ?', [empId], (err: any, results: any) => {
+            connection.query('SELECT * FROM employee WHERE legajo = ?', [empId], (err: any, results: any) => {
                 if (err) console.error(err);
                 connection.release()
                 res.send(results)
@@ -40,6 +39,7 @@ export let controller = {
     createEmployee: (req: Request, res: Response) => {
         const {apellido, nombre, dni, sector, fecha_ingreso, activo} = req.body;
         var values = [apellido, nombre, dni, sector, fecha_ingreso, activo];
+        console.log(values)
         pool.getConnection((err: any, connection: any) => {
         if (err) {
             console.error(err);
@@ -47,7 +47,7 @@ export let controller = {
             return;
         }
         else{
-            let sql:string = 'INSERT INTO employees (apellido, nombre, dni, sector, fecha_ingreso, activo) VALUES (?, ?, ?, ?, ?, ?)';
+            let sql:string = 'INSERT INTO employee (apellido, nombre, dni, sector, fecha_ingreso, activo) VALUES (?, ?, ?, ?, ?, ?)';
             connection.query(sql, values, (err: any, results: any) => {
                 if (err) {
                   console.error(err);
@@ -91,7 +91,7 @@ export let controller = {
                 return;
             }
             console.log('MySQL Connection: ', connection.threadId);
-            connection.query('DELETE FROM articulo WHERE legajo = ?', [empId], (err: any, results: any) => {
+            connection.query('DELETE FROM employee WHERE legajo = ?', [empId], (err: any, results: any) => {
                 if (err) {
                     console.error(err);
                     res.json({message: 'Error al eliminar un empleado'})
