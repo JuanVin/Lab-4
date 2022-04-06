@@ -32,7 +32,7 @@ function loadTable(url) {
                         text = document.createTextNode(obj[property])
                         th.appendChild(text)
                         tr.appendChild(th)
-                        if (property === 'activo') {
+                        if (property === Object.keys(obj).pop()) {
                             for (let index = 0; index < 2; index++) {
                                 th = document.createElement("th");
                                 activeBtn = document.createElement("button");
@@ -100,11 +100,24 @@ async function updateEmployee(employee) {
 
     let grid = document.getElementById("grid"),
         item3 = document.getElementById("item3"),
-        nombre = document.getElementById("nombreA")
+        nombre = document.getElementById("nombreA"),
+        apellido = document.getElementById("apellidoA"),
+        dni = document.getElementById("dniA"),
+        sector = document.getElementById("sectorA"),
+        fecha_ingreso = document.getElementById("fechaA"),
+        activo = document.getElementById("activoA")
 
-    grid.style.display = await "none"
-    item3.style.display = await "block"
-    nombre.setAttribute("value", employee.nombre)
+    nombre.value = employee.nombre
+    apellido.value = employee.apellido
+    dni.value = employee.dni
+    sector.value = employee.sector
+    fecha_ingreso.value = employee.fecha_ingreso
+    activo.value = employee.value
+
+    grid.style.display = "none"
+    item3.style.display = "block"
+    
+
 
 }
 
