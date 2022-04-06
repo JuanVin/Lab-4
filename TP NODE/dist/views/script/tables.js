@@ -32,7 +32,7 @@ function loadTable(url) {
                         text = document.createTextNode(obj[property])
                         th.appendChild(text)
                         tr.appendChild(th)
-                        if (property === 'fecha_ingreso') {
+                        if (property === 'activo') {
                             for (let index = 0; index < 2; index++) {
                                 th = document.createElement("th");
                                 activeBtn = document.createElement("button");
@@ -42,7 +42,7 @@ function loadTable(url) {
                                     activeBtn.setAttribute("onclick", `updateEmployee(${ JSON.stringify(obj) })`)
                                     tr.classList.add("greenTr")
                                     activeBtn.appendChild(document.createTextNode("Actualizar"))
-                                } else {  
+                                } else {
                                     activeBtn.classList.add("redBtn")
                                     activeBtn.setAttribute("onclick", `deleteEmployee(${ obj.legajo })`)
                                     tr.classList.add("redTr")
@@ -51,7 +51,7 @@ function loadTable(url) {
                                 }
                                 th.appendChild(activeBtn)
                                 tr.appendChild(th)
-                            }    
+                            }
                         }
                     }
                     table.appendChild(tr)
@@ -68,53 +68,68 @@ function clearTable(table) {
     }
 }
 
-function createEmployee(){
+function createEmployee() {
     let data = {
-        nombre: document.getElementById("nombre").value,
-        apellido: document.getElementById("apellido").value,
-        dni: document.getElementById("dni").value,
-        sector: document.getElementById("sector").value,
-        fecha_ingreso: document.getElementById("fecha").value,
-        activo: document.querySelector('input[name="activo"]:checked').value
+            nombre: document.getElementById("nombre").value,
+            apellido: document.getElementById("apellido").value,
+            dni: document.getElementById("dni").value,
+            sector: document.getElementById("sector").value,
+            fecha_ingreso: document.getElementById("fecha").value,
+            activo: document.querySelector('input[name="activo"]:checked').value
         },
         url = "http://127.0.0.1:3000/insert",
         options = {
             method: 'POST', // or 'PUT'
             body: JSON.stringify(data), // data can be `string` or {object}!
-            headers:{
-          'Content-Type': 'application/json'
+            headers: {
+                'Content-Type': 'application/json'
             }
         }
 
     fetch(url, options)
-    .then(res => res.json())
-    .catch(error => console.error('Error:', error))
-    .then(response => {
-        console.log(response)
-        loadTable("http://127.0.0.1:3000/employee/")
-    })
+        .then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => {
+            console.log(response)
+            loadTable("http://127.0.0.1:3000/employee/")
+        })
 }
 
-function updateEmployee(employee){
+async function updateEmployee(employee) {
     console.log(employee)
+
+    let grid = document.getElementById("grid"),
+        item3 = document.getElementById("item3"),
+        nombre = document.getElementById("nombreA")
+
+    grid.style.display = await "none"
+    item3.style.display = await "block"
+    nombre.setAttribute("value", employee.nombre)
+
 }
 
-function deleteEmployee(id){
-    
+function back() {
+    let grid = document.getElementById("grid"),
+        item3 = document.getElementById("item3")
+    grid.style.display = "grid"
+    item3.style.display = "none"
+}
+
+function deleteEmployee(id) {
+
     let option = {
-        method: 'DELETE', 
-        headers:{
-          'Content-Type': 'application/json'
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
             }
         },
         url = `http://127.0.0.1:3000/delete/${id}`
-    
+
     fetch(url, option)
-    .then(res => res.json())
-    .catch(error => console.log(error))
-    .then(data => {
-        console.log(data)
-        loadTable("http://127.0.0.1:3000/employee/")
-        }
-    )
+        .then(res => res.json())
+        .catch(error => console.log(error))
+        .then(data => {
+            console.log(data)
+            loadTable("http://127.0.0.1:3000/employee/")
+        })
 }

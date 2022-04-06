@@ -11,8 +11,8 @@
 
 <body>
     <div class="container">
-        <div class="grid-container">
-            <div class="item1">
+        <div class="grid-container" id="grid">
+            <div class="item1" id="item1">
                 <h1>Tabla de empleados</h1>
                 <div class="search">
                     <input type="text" class="input" name="param" id="param" placeholder="Ingrese empleado">
@@ -49,11 +49,31 @@
                     <input type="radio" id="activo" name="activo" value="0">
                     <label for="inactivo">Inactivo</label>
                 </div>
-                <input type="datetime-local" id="fecha" name="trip-start"
-                min="2000-01-01" max="2025-12-31">
+                <input type="datetime-local" id="fecha" name="trip-start" min="2000-01-01" max="2025-12-31">
                 <button class="btn btn-form" onclick="createEmployee()">Cargar</button>
             </div>
         </div>
+        <div class="item3" id="item3" style="display: none;">
+            <h1>Actualizar empleado</h1>
+            <label for="nombreA">Nombre:</label>
+            <input type="text" class="input" name="nombre" id="nombreA" placeholder="Ingrese nombre">
+            <label for="apellidoA">Apellido:</label>
+            <input type="text" class="input" name="apellido" id="apellidoA" placeholder="Ingrese apellido">
+            <label for="dni">DNI:</label>
+            <input type="number" class="input" name="dni" id="dni" placeholder="Ingrese DNI">
+            <label for="sector">Sector:</label>
+            <input type="text" class="input" name="sector" id="sector" placeholder="Ingrese sector">
+            <div class="radios">
+                <input type="radio" id="activo" name="activo" value="1">
+                <label for="activo">Activo</label>
+                <input type="radio" id="activo" name="activo" value="0">
+                <label for="inactivo">Inactivo</label>
+            </div>
+            <input type="datetime-local" id="fecha" name="trip-start" min="2000-01-01" max="2025-12-31">
+            <button class="btn btn-form" onclick="createEmployee()">Actualizar</button>
+            <button class="btn btn-form" onclick="back()">Volver</button>
+        </div>
+    </div>
     </div>
     <script src="./script/tables.js"></script>
 </body>
