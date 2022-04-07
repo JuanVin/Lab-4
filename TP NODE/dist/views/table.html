@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="./styles/table.css" rel="stylesheet" type="text/css">
-    <title>Document</title>
+    <title>Table</title>
 </head>
 
 <body>
@@ -55,6 +55,7 @@
         </div>
         <div class="item3" id="item3" style="display: none;">
             <h1>Actualizar empleado</h1>
+            <input id="legajo" name="legajo" type="hidden">
             <label for="nombreA">Nombre:</label>
             <input type="text" class="input" name="nombre" id="nombreA" placeholder="Ingrese nombre">
             <label for="apellidoA">Apellido:</label>
@@ -70,7 +71,7 @@
                 <label for="inactivo">Inactivo</label>
             </div>
             <input type="datetime-local" id="fechaA" name="trip-start" min="2000-01-01" max="2025-12-31">
-            <button class="btn btn-form" onclick="createEmployee()">Actualizar</button>
+            <button class="btn btn-form" onclick="updateEmployee()">Actualizar</button>
             <button class="btn btn-form" onclick="back()">Volver</button>
         </div>
     </div>

@@ -78,9 +78,9 @@ export let controller = {
                   res.json({message:"Articulo Actualizado con exito"})
                 }
                
-              });
+            });
         }          
-      });
+        });
     },
     deleteEmployee: (req: Request, res: Response) => {
         let empId = req.params.id

@@ -39,7 +39,7 @@ function loadTable(url) {
                                 activeBtn.classList.add("btn")
                                 if (index === 0) {
                                     activeBtn.classList.add("greenBtn")
-                                    activeBtn.setAttribute("onclick", `updateEmployee(${ JSON.stringify(obj) })`)
+                                    activeBtn.setAttribute("onclick", `showUpdateFrom(${ JSON.stringify(obj) })`)
                                     tr.classList.add("greenTr")
                                     activeBtn.appendChild(document.createTextNode("Actualizar"))
                                 } else {
@@ -95,30 +95,46 @@ function createEmployee() {
         })
 }
 
-async function updateEmployee(employee) {
-    console.log(employee)
+function updateEmployee() {
 
-    let grid = document.getElementById("grid"),
-        item3 = document.getElementById("item3"),
-        nombre = document.getElementById("nombreA"),
-        apellido = document.getElementById("apellidoA"),
-        dni = document.getElementById("dniA"),
-        sector = document.getElementById("sectorA"),
-        fecha_ingreso = document.getElementById("fechaA"),
-        activo = document.getElementById("activoA")
+    let data = getData(),
+        updateData = {},
+        url = "http://127.0.0.1:3000/update",
+        options = {}
 
-    nombre.value = employee.nombre
-    apellido.value = employee.apellido
-    dni.value = employee.dni
-    sector.value = employee.sector
-    fecha_ingreso.value = employee.fecha_ingreso
-    activo.value = employee.value
+    for (const key in data) {
+        updateData[key] = data[key].value
+    }
 
-    grid.style.display = "none"
-    item3.style.display = "block"
-    
+    option = {
+        method: 'POST', // or 'PUT'
+        body: JSON.stringify(updateData), // data can be `string` or {object}!
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
 
+    fetch(url, options)
+        .then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then(response => {
+            console.log(response)
+            loadTable("http://127.0.0.1:3000/update")
+        })
 
+}
+
+function getData() {
+    let data = {
+        legajo: document.getElementById("legajo"),
+        nombre: document.getElementById("nombreA"),
+        apellido: document.getElementById("apellidoA"),
+        dni: document.getElementById("dniA"),
+        sector: document.getElementById("sectorA"),
+        fecha_ingreso: document.getElementById("fechaA"),
+        activo: document.getElementById("activoA")
+    }
+    return data
 }
 
 function back() {
@@ -126,6 +142,19 @@ function back() {
         item3 = document.getElementById("item3")
     grid.style.display = "grid"
     item3.style.display = "none"
+}
+
+function showUpdateFrom(employee) {
+    let grid = document.getElementById("grid"),
+        item3 = document.getElementById("item3"),
+        data = getData()
+
+    grid.style.display = "none"
+    item3.style.display = "block"
+
+    for (const key in data) {
+        data[key].value = employee[key]
+    }
 }
 
 function deleteEmployee(id) {
