@@ -158,6 +158,7 @@ function showUpdateFrom(employee) {
             data[key].value = employee[key]
         }
     }
+
 }
 
 function deleteEmployee(id) {
