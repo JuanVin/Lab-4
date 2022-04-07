@@ -55,7 +55,7 @@ export let controller = {
                 }else{
                   res.json({message:"Articulo Insertado con exito"})
                 }
-              });
+            });
         }          
       });
     },

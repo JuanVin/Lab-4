@@ -106,8 +106,8 @@ function updateEmployee() {
         updateData[key] = data[key].value
     }
 
-    option = {
-        method: 'POST', // or 'PUT'
+    options = {
+        method: 'PUT', // or 'PUT'
         body: JSON.stringify(updateData), // data can be `string` or {object}!
         headers: {
             'Content-Type': 'application/json'
@@ -119,7 +119,8 @@ function updateEmployee() {
         .catch(error => console.error('Error:', error))
         .then(response => {
             console.log(response)
-            loadTable("http://127.0.0.1:3000/update")
+            loadTable("http://127.0.0.1:3000/employee/")
+            back()
         })
 
 }
@@ -132,7 +133,7 @@ function getData() {
         dni: document.getElementById("dniA"),
         sector: document.getElementById("sectorA"),
         fecha_ingreso: document.getElementById("fechaA"),
-        activo: document.getElementById("activoA")
+        activo: document.querySelector('input[name="activoA"]:checked')
     }
     return data
 }
@@ -153,7 +154,9 @@ function showUpdateFrom(employee) {
     item3.style.display = "block"
 
     for (const key in data) {
-        data[key].value = employee[key]
+        if (data[key].name != "activoA") {
+            data[key].value = employee[key]
+        }
     }
 }
 
