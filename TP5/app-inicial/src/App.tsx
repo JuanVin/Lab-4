@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Test from './Test'
+import Home from './components/Home'
 
 
 /*
@@ -32,7 +32,7 @@ const App = () => (
   
   <Router>
       <Routes>
-        <Route path="/home" element={<Test />} />
+        <Route path="/" element={<Home />} />
       </Routes>
   </Router>
   
