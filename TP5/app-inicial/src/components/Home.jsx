@@ -1,41 +1,51 @@
 
-import { Col, Container, Row } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
+import {Col, Container, Row, Image } from 'react-bootstrap';
 import json from '../data/instrumentos.json'
+
 const { instrumentos } = json
 
 function Home() {
-   
+    function getPrice(type){
+        if (type === "G"){
+            return <p style={{color: "green"}}>Envío gratis a todo el país</p>
+        }
+        return <p style={{color: "orange"}}>Costo de envio interior de Argentina: ${type}</p>
+    }
     return (
         <>
+        <Container className='mt-5'>
+            <div>
             {instrumentos.map(instrumento => (
-                <>
-                <Container>
+                <> 
+                <div className="w-75 p-3">
                     <Row>
-                        <Col>
-                            <img src={process.env.PUBLIC_URL+"/img/"+instrumento.imagen}></img>
+                        <Col sm={3}>     
+                            <a href={`DetalleInstrumento/${instrumento.id}`}><Image src={process.env.PUBLIC_URL+"/img/"+instrumento.imagen} href="https://github.com/Joeyryanbridges"></Image></a>
                         </Col>
-                        <Col>
-                        <div>
-                        <h3>
-                        {instrumento.descripcion}
+                        <Col sm={9}>
+                    
+                        <h4 class>
+                        {instrumento.instrumento}
+                        </h4>
+
+                        <h3> 
+                        $ {instrumento.precio}  
                         </h3>
+                        
+                        {getPrice(instrumento.costoEnvio)}
+                       
                         <p>
-                        {instrumento.precio}
+                            {instrumento.cantidadVendida} Vendidos
                         </p>
-                        <p>
-                        {instrumento.costoEnvio}
-                        </p>
-                        <p>
-                            {instrumento.cantidadVendida}
-                        </p>
-                        <Button variant="secondary">Primary</Button>{' '}
-                        </div>
-                        </Col>
-                    </Row>
-                </Container>
+                   
+                        </Col>        
+                    </Row>     
+                    <hr></hr>
+                </div>       
                 </>           
-            ))}          
+            ))}  
+            </div>
+            </Container>        
         </>
     );
 }
