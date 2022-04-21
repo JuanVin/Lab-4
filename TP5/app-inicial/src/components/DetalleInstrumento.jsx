@@ -25,12 +25,13 @@ function DetalleInstrumento(){
             <>
             <div className="w-75 p-3">
             <Row className="mt-5">
-                <Col sm={8}>
+                <Col sm={7} >
                     <img src={process.env.PUBLIC_URL+"/img/"+ins.imagen} width={400} height={400}></img>
                     <p className="mt-3" style={{fontSize: "13px"}}>Descripción: </p>
                     <p style={{fontSize: "13px"}}>{ins.descripcion}</p>
                 </Col>
-                <Col sm={4}>
+                <Col sm={5}>
+                    <div className="block-example border border-dark p-3">
                     <p className="mt-5" style={{color: "grey"}}>{ins.cantidadVendida} vendidos</p>
                     <h3>{ins.instrumento}</h3>
                     <h2 className="mt-3">$ {ins.precio}</h2>
@@ -39,6 +40,7 @@ function DetalleInstrumento(){
                     <p className="mt-5 mb-0"> Costo envio: </p>
                     {getPrice(ins.costoEnvio)}
                     <Button className="mt-5" variant="outline-primary">Agregar al carrito</Button>{' '}
+                    </div>
                 </Col>
             </Row>
             </div>
