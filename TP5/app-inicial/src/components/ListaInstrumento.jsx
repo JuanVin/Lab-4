@@ -1,5 +1,5 @@
 
-import {Col, Container, Row, Image, Nav } from 'react-bootstrap';
+import {Col, Row, Image } from 'react-bootstrap';
 import json from '../data/instrumentos.json'
 import NavBar from './NavBar';
 const { instrumentos } = json

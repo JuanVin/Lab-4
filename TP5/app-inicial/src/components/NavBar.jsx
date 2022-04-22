@@ -3,7 +3,7 @@ import {Navbar, Container, Nav} from 'react-bootstrap'
 
 function NavBar(){
     return(
-        <Navbar bg="dark" variant="dark">
+        <Navbar style={{backgroundColor:"#fff159", color:"black" }} >
         <Container>
         <Navbar.Brand href="/">Navbar</Navbar.Brand>
         <Nav className="me-auto">
