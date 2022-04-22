@@ -1,7 +1,7 @@
 import {useParams} from "react-router-dom"
 import json from '../data/instrumentos.json'
 import { Row, Col , Button} from 'react-bootstrap'
-
+import NavBar from "./NavBar"
 const { instrumentos } = json
 
 
@@ -26,12 +26,13 @@ function DetalleInstrumento(){
             <div className="w-75 p-3">
             <Row className="mt-5">
                 <Col sm={7} >
-                    <img src={process.env.PUBLIC_URL+"/img/"+ins.imagen} width={400} height={400}></img>
+                    <img src={process.env.PUBLIC_URL+"/img/"+ins.imagen} 
+                    style={{display:"block", width: "400px",  marginLeft: "auto", marginRight: "auto"}}></img>
                     <p className="mt-3" style={{fontSize: "13px"}}>Descripción: </p>
                     <p style={{fontSize: "13px"}}>{ins.descripcion}</p>
                 </Col>
                 <Col sm={5}>
-                    <div className="block-example border border-dark p-3">
+                    <div style={{borderLeft: "1px solid #e5e5e5", borderRight:  "1px solid #e5e5e5"}} className="p-3">
                     <p className="mt-5" style={{color: "grey"}}>{ins.cantidadVendida} vendidos</p>
                     <h3>{ins.instrumento}</h3>
                     <h2 className="mt-3">$ {ins.precio}</h2>
@@ -52,9 +53,10 @@ function DetalleInstrumento(){
     }) 
 
     return (
-        <div className="container">
+        <><NavBar></NavBar>
+        <div className="container" style={{ display: "flex", justifyContent: "center" }}>
             {instrumento}
-        </div>
+        </div></>
     )
 }
 
