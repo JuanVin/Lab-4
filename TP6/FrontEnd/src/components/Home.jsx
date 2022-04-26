@@ -2,9 +2,15 @@
 import {Col, Container, Row, Image } from 'react-bootstrap';
 import json from '../data/instrumentos.json'
 
-const { instrumentos } = json
+
 
 function Home() {
+
+    async function getData(){
+        let response = await fetch('localhost:3000/instruments')
+        response = await response.json()
+        return response
+    }
     function getPrice(type){
         if (type === "G"){
             return <p style={{color: "green"}}>Envío gratis a todo el país</p>
@@ -15,7 +21,7 @@ function Home() {
         <>
         <Container className='mt-5'>
             <div>
-            {instrumentos.map(instrumento => (
+            {getData().map(instrumento => (
                 <> 
                 <div className="w-75 p-3">
                     <Row>
