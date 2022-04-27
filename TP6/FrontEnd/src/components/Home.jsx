@@ -1,16 +1,32 @@
 
 import {Col, Container, Row, Image } from 'react-bootstrap';
-import json from '../data/instrumentos.json'
+import { useEffect, useState } from "react";
 
 
+async function Home() {
 
-function Home() {
+    const [isLoading, setIsLoading] = useState(true);
+    const [detalleInstrumento, getInstrumento] = useState(null);
 
-    async function getData(){
-        let response = await fetch('localhost:3000/instruments')
-        response = await response.json()
-        return response
+    useEffect(() => {
+        getData()
+    }, []);
+
+    async function getData() {
+        try {
+            const response = await fetch('localhost:3000/instruments');
+            if (response.ok) {
+                console.log('Todo bien');
+                getInstrumento(response.json())
+                setIsLoading(false)
+            } else {
+                console.log('Respuesta de red OK pero respuesta de HTTP no OK');
+            }
+        } catch (error) {
+            console.log('Hubo un problema con la petición Fetch:' + error.message);
+        }
     }
+
     function getPrice(type){
         if (type === "G"){
             return <p style={{color: "green"}}>Envío gratis a todo el país</p>
@@ -21,7 +37,7 @@ function Home() {
         <>
         <Container className='mt-5'>
             <div>
-            {getData().map(instrumento => (
+            {(await getData()).map((instrumento) => (
                 <> 
                 <div className="w-75 p-3">
                     <Row>
@@ -30,7 +46,7 @@ function Home() {
                         </Col>
                         <Col sm={9}>
                     
-                        <h4 class>
+                        <h4>
                         {instrumento.instrumento}
                         </h4>
 
