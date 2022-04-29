@@ -23,7 +23,7 @@ exports.controller = {
                     instrumento.push(JSON.parse(JSON.stringify(ins)));
                 });
                 connection.release();
-                res.send(instrumento);
+                res.send(results);
             });
         });
     }),

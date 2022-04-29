@@ -12,13 +12,13 @@ export let controller = {
             }
             console.log('MySQL Connection: ', connection.threadId);
             connection.query('SELECT * FROM instrumento limit 10', (err: any, results: any) => {
-                if (err) console.error(err); 
+                if (err) console.error(err);
                 let instrumento: Instrumento[] = [] 
                 results.forEach((ins: any) => {
                     instrumento.push(JSON.parse(JSON.stringify(ins)))
                 });
                 connection.release()
-                res.send(instrumento)
+                res.send(results)
             });
         })
     })

@@ -8,12 +8,18 @@ function InstrumentDetail() {
 
     const { id } = useParams();
     const [isLoading, setIsLoading] = useState(true);
-    const [detalleInstrumento, setInstrumento] = useState(null);
+    const [detalleInstrumento, setDetalleInstrumento] = useState(null);
 
-    useEffect(() => {
+    useEffect(() => {/*
         let fetchData = apiFunctions.getInstrumetById(id)
-        setInstrumento(fetchData)
-        setIsLoading(false)
+        setDetalleInstrumento(fetchData)
+        setIsLoading(false)*/
+        fetch(`http://localhost:3000/instruments/${id}`)
+            .then(response => response.json())
+            .then(data => {
+                setDetalleInstrumento(data)
+                setIsLoading(false)
+            })
     }, []);
 
     if (isLoading) {

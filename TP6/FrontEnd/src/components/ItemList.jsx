@@ -1,7 +1,7 @@
-import {Col, Row, Image } from 'react-bootstrap';
+import { Col, Row, Image } from 'react-bootstrap';
 
-function ListItem({ data }) {
-
+function ItemList({ instrumentos }) {
+    let instrumentList = []
     function getPrice(type) {
         if (type === "G") {
             return <p style={{ color: "green" }}>Envío gratis a todo el país</p>
@@ -9,35 +9,43 @@ function ListItem({ data }) {
         return <p style={{ color: "orange" }}>Costo de envio interior de Argentina: ${type}</p>
     }
 
-    return (
-        <>
-            <div className="w-100 p-3">
+    instrumentos.map(instrumento => {
+        instrumentList.push(
+           <>
+            
                 <Row>
                     <Col sm={3}>
-                        <a href={`lista/${data.id}`}><Image src={process.env.PUBLIC_URL + "/img/" + data.imagen}></Image></a>
+                        <a href={`lista/${instrumento.id}`}><Image src={process.env.PUBLIC_URL + "/img/" + instrumento.imagen}></Image></a>
                     </Col>
                     <Col sm={9}>
 
                         <h4 class>
-                            {data.instrumento}
+                            {instrumento.instrumento}
                         </h4>
 
                         <h3>
-                            $ {data.precio}
+                            $ {instrumento.precio}
                         </h3>
 
-                        {getPrice(data.costoEnvio)}
+                        {getPrice(instrumento.costoEnvio)}
 
                         <p>
-                            {data.cantidadVendida} Vendidos
+                            {instrumento.cantidadVendida} Vendidos
                         </p>
 
                     </Col>
                 </Row>
                 <hr></hr>
-            </div>
-        </>
+            
+           </>
+       )
+    })
+
+    return (
+        <div className="p-3 mt-5" style={{borderRadius: "10px", border: "1px solid #e5e5e5", backgroundColor: "white"}}>
+            {instrumentList}
+        </div>
     )
 }
 
-export default ListItem
+export default ItemList
