@@ -1,7 +1,9 @@
+import Instrumento from "../models/instrumentos"
+
 let apiFunctions = {
-    getInstruments: async() => {
-        let url = 'http://localhost:3000/instruments',
-            options = {
+    getInstruments: async () => {
+        let url:string = "http://localhost:3000/instruments",
+            options:object = {
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json',
@@ -9,18 +11,19 @@ let apiFunctions = {
                 },
                 mode: 'cors'
             },
-            response
+            response:any
+            
         try {
             response = await fetch(url, options)
             response = await response.json()
         } catch (e) {
             console.log(e)
         }
-        return response
+        return response as Instrumento[]
     },
-    getInstrumetById: async(id) => {
-        let url = `http://localhost:3000/instruments/${id}`,
-            options = {
+    getInstrumetById: async(id:string) => {
+        let url:string = `http://localhost:3000/instruments/${id}`,
+            options:object = {
                 method: 'GET',
                 headers: {
                     'Content-type': 'application/json',
@@ -28,14 +31,14 @@ let apiFunctions = {
                 },
                 mode: 'cors'
             },
-            response
+            response:any
         try {
             response = await fetch(url, options)
             response = await response.json()
         } catch (e) {
             console.log(e)
         }
-        return response
+        return response as Instrumento
     }
 }
 

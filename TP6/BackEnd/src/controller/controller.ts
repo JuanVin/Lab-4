@@ -18,12 +18,12 @@ export let controller = {
                     instrumento.push(JSON.parse(JSON.stringify(ins)))
                 });
                 connection.release()
-                res.send(results)
+                res.send(instrumento)
             });
         })
     })
     ,
-    getInstrumentBtId: (req: Request, res: Response) => new Promise ((resolve, rejects) => {
+    getInstrumentById: (req: Request, res: Response) => new Promise ((resolve, rejects) => {
         let empId = req.params.id
         pool.getConnection((err: any, connection: any) => {
             if(err){
@@ -35,7 +35,10 @@ export let controller = {
             connection.query('SELECT * FROM instrumento WHERE id = ?', [empId], (err: any, results: any) => {
                 if (err) console.error(err);
                 connection.release()
+                console.log(empId)
+                
                 results = new Instrumento(JSON.parse(JSON.stringify(results[0])))
+                
                 res.send(results)
             });
         })
@@ -106,8 +109,4 @@ export let controller = {
             });
         })
     }
-}
-
-function ins(ins: any, arg1: (any: any) => void) {
-    throw new Error("Function not implemented.")
 }

@@ -3,30 +3,23 @@ import { useEffect, useState } from "react";
 import NavBar from './NavBar';
 import apiFunctions from './apiFunctions';
 import ItemList from './ItemList';
+import Instrumento from "../models/instrumentos";
 
 
 function InstrumentList() {
 
     const [isLoading, setIsLoading] = useState(true);
-    const [instrumentos, setInstrumento] = useState([null]);
+    const [instrumentos, setInstrumento] = useState<Instrumento[]>([]);
 
     useEffect(() => {
-        fetch('http://localhost:3000/instruments', {
-            method: 'GET',
-            headers: {
-                'Content-type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
-            },
-            mode: 'cors'
-        })
-            .then(response => response.json())
-            .then(data => {
-                setInstrumento(data)
-                setIsLoading(false)
-            })
+        getFetchData()
     }, []);
 
-
+    let getFetchData = async () => {
+        let fetchData:Instrumento[] = await apiFunctions.getInstruments()
+        setIsLoading(false)
+        setInstrumento(fetchData)
+    } 
     if (isLoading) {
         return (
             <>

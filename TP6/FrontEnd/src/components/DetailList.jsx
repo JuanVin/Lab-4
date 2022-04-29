@@ -1,9 +1,9 @@
-import { Row, Col, Button, Table } from 'react-bootstrap'
+import { Row, Col, Button, Table, Image } from 'react-bootstrap'
 
-function DetailList({ data }) {
+function DetailList( {data} ) {
     function getPrice(type) {
         if (type === "G") {
-            return <p style={{ color: "green" }}>Envío gratis a todo el país</p>
+            return <p style={{ color: "green" }}><Image src={process.env.PUBLIC_URL + "/img/" + "camion.png"}></Image> Envío gratis a todo el país</p>
         }
         return <p style={{ color: "orange" }}>Costo de envio interior de Argentina: ${type}</p>
     }
@@ -44,7 +44,7 @@ function DetailList({ data }) {
                             <h2 className="mt-3 mb-0">$ {data.precio}</h2>
                             <p className="mb-0" style={{ fontSize: "17px" }}>en 12x ${data.precio / 12}</p>
                             <a href="#" style={{ fontSize: "13px", textDecoration: "none" }}>Ver los medios de pago</a>
-                            <p className="mt-5 mb-0"> Costo envio: </p>
+                            <p className="mt-5 mb-0"> Costo de envio: </p>
                             {getPrice(data.costoEnvio)}
                             <Button className="mt-5 d-block" size="lg" style={{ width: "100%" }} variant="primary">Comprar ahora</Button>{' '}
                             <Button className="mt-3 d-block mb-5" size="lg" style={{ width: "100%" }} variant="outline-primary">Agregar al carrito</Button>{' '}
@@ -57,7 +57,6 @@ function DetailList({ data }) {
                     <p className="d-inline p-1" style={{ borderRight: "solid 1px grey" }}> Publicación #<b>{data.id}</b> </p>
                     <a className="d-inline p-1" href="#" style={{ textDecoration: "none" }}>Denunciar</a>
                 </div>
-
                 <img className="mb-5" style={{ width: "100%" }} src={process.env.PUBLIC_URL + "/img/propaganda.png"}></img>
             </div>
         </>

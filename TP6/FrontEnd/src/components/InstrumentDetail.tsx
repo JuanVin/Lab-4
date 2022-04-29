@@ -3,24 +3,24 @@ import { useEffect, useState } from "react";
 import NavBar from "./NavBar"
 import apiFunctions from "./apiFunctions";
 import DetailList from "./DetailList";
+import Instrumento from "../models/instrumentos";
 
 function InstrumentDetail() {
 
     const { id } = useParams();
     const [isLoading, setIsLoading] = useState(true);
-    const [detalleInstrumento, setDetalleInstrumento] = useState(null);
+    const [detalleInstrumento, setDetalleInstrumento] = useState<Instrumento>();
 
-    useEffect(() => {/*
-        let fetchData = apiFunctions.getInstrumetById(id)
+    useEffect(() => {
+        getFetchData()
+    }, [isLoading]);
+
+    let getFetchData = async () => {
+        let fetchData:Instrumento = await apiFunctions.getInstrumetById(String(id))
+        console.log(fetchData)
         setDetalleInstrumento(fetchData)
-        setIsLoading(false)*/
-        fetch(`http://localhost:3000/instruments/${id}`)
-            .then(response => response.json())
-            .then(data => {
-                setDetalleInstrumento(data)
-                setIsLoading(false)
-            })
-    }, []);
+        setIsLoading(false)
+    }
 
     if (isLoading) {
         return (
@@ -37,7 +37,7 @@ function InstrumentDetail() {
         <>
             <body style={{ backgroundColor: "#ededed" }}>
                 <NavBar></NavBar>
-                <div className="container" style={{ display: "flex", justifyContent: "center" }}>
+                <div className="container" style={{ display: "flex", justifyContent: "center"}}>
                     <DetailList data={detalleInstrumento}></DetailList>
                 </div>
             </body>

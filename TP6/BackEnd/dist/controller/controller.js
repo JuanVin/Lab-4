@@ -23,11 +23,11 @@ exports.controller = {
                     instrumento.push(JSON.parse(JSON.stringify(ins)));
                 });
                 connection.release();
-                res.send(results);
+                res.send(instrumento);
             });
         });
     }),
-    getInstrumentBtId: (req, res) => new Promise((resolve, rejects) => {
+    getInstrumentById: (req, res) => new Promise((resolve, rejects) => {
         let empId = req.params.id;
         mysqldb_1.pool.getConnection((err, connection) => {
             if (err) {
@@ -40,6 +40,7 @@ exports.controller = {
                 if (err)
                     console.error(err);
                 connection.release();
+                console.log(empId);
                 results = new instrumento_1.default(JSON.parse(JSON.stringify(results[0])));
                 res.send(results);
             });
@@ -113,6 +114,3 @@ exports.controller = {
         });
     }
 };
-function ins(ins, arg1) {
-    throw new Error("Function not implemented.");
-}
