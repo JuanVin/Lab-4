@@ -42,7 +42,7 @@ function DetailList( {data} ) {
                             <p className="mt-5" style={{ color: "grey" }}>{data.cantidadVendida} vendidos</p>
                             <h3>{data.instrumento}</h3>
                             <h2 className="mt-3 mb-0">$ {data.precio}</h2>
-                            <p className="mb-0" style={{ fontSize: "17px" }}>en 12x ${data.precio / 12}</p>
+                            <p className="mb-0" style={{ fontSize: "17px" }}>en 12x ${Math.round(data.precio / 12)}</p>
                             <a href="#" style={{ fontSize: "13px", textDecoration: "none" }}>Ver los medios de pago</a>
                             <p className="mt-5 mb-0"> Costo de envio: </p>
                             {getPrice(data.costoEnvio)}
