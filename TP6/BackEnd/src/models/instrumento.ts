@@ -8,7 +8,7 @@ class Instrumento {
     costoEnvio:string = "";
     cantidadVendida:string = "";
     descripcion:string = "";
-
+    activo:boolean = true
     constructor(instrumento: Instrumento){
         this.id= instrumento.id
         this.instrumento = instrumento.instrumento
@@ -19,6 +19,7 @@ class Instrumento {
         this.costoEnvio = instrumento.costoEnvio
         this.cantidadVendida = instrumento.cantidadVendida
         this.descripcion = instrumento.descripcion
+        this.activo = instrumento.activo
     }
 }
 

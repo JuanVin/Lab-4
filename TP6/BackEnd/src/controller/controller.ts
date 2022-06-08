@@ -11,9 +11,10 @@ export let controller = {
                 return;
             }
             console.log('MySQL Connection: ', connection.threadId);
-            connection.query('SELECT * FROM instrumento limit 10', (err: any, results: any) => {
+            connection.query('SELECT * FROM instrumento WHERE activo = 1', (err: any, results: any) => {
                 if (err) console.error(err);
                 let instrumento: Instrumento[] = [] 
+                
                 results.forEach((ins: any) => {
                     instrumento.push(JSON.parse(JSON.stringify(ins)))
                 });
@@ -45,9 +46,8 @@ export let controller = {
     })   
     ,
     createInstrument: (req: Request, res: Response) => {
-        const {apellido, nombre, dni, sector, fecha_ingreso, activo} = req.body;
-        var values = [apellido, nombre, dni, sector, fecha_ingreso, activo];
-        console.log(values)
+        const {instrumento, marca, modelo, precio, descripcion, activo} = req.body;
+        var values = [instrumento, marca, modelo, precio, descripcion, activo];
         pool.getConnection((err: any, connection: any) => {
         if (err) {
             console.error(err);
@@ -55,7 +55,7 @@ export let controller = {
             return;
         }
         else{
-            let sql:string = 'INSERT INTO employees (apellido, nombre, dni, sector, fecha_ingreso, activo) VALUES (?, ?, ?, ?, ?, ?)';
+            let sql:string = 'INSERT INTO instrumento (instrumento, marca, modelo, precio, descripcion, activo) VALUES (?, ?, ?, ?, ?, ?)';
             connection.query(sql, values, (err: any, results: any) => {
                 if (err) {
                   console.error(err);
@@ -68,8 +68,10 @@ export let controller = {
       });
     },
     updateInstrument: (req: Request, res: Response) => {
-        const {legajo, apellido, nombre, dni, sector, fecha_ingreso, activo} = req.body;
-        var values = [ apellido, nombre, dni, sector, fecha_ingreso, activo, legajo];
+
+        console.log(req.body)
+        const {id, instrumento, marca, modelo, precio, descripcion} = req.body;
+        var values = [instrumento, marca, modelo, precio, descripcion, id];
         pool.getConnection((err: any, connection: any) => {
         if (err) {
             console.error(err);
@@ -77,7 +79,7 @@ export let controller = {
             return;
         }
         else{
-            let sql:string = 'UPDATE employees SET apellido=?, nombre=?, dni=?, sector=?, fecha_ingreso=?, activo=? WHERE legajo=?';
+            let sql:string = 'UPDATE instrumento SET instrumento=?, marca=?, modelo=?, precio=?, descripcion=? WHERE id=?';
             connection.query(sql, values, (err:any, results:any) => {
                 if (err) {
                   console.error(err);
@@ -85,13 +87,13 @@ export let controller = {
                 }else{
                   res.json({message:"Articulo Actualizado con exito"})
                 }
-               
             });
         }          
         });
     },
     deleteInstrument: (req: Request, res: Response) => {
-        let empId = req.params.id
+        console.log("asdads")
+        let insId = req.params.id
         pool.getConnection((err: any, connection: any) => {
             if(err){
                 console.log(err)
@@ -99,12 +101,11 @@ export let controller = {
                 return;
             }
             console.log('MySQL Connection: ', connection.threadId);
-            connection.query('DELETE FROM employees WHERE legajo = ?', [empId], (err: any, results: any) => {
+            connection.query('UPDATE instrumento SET activo = 0 WHERE id = ?', [insId], (err: any, results: any) => {
                 if (err) {
-                    console.error(err);
-                    res.json({message: 'Error al eliminar un empleado'})
+                    res.json({message: 'Error al eliminar un instrumento'})
                 }else {
-                    res.json({message: 'Empleajo eliminado exitosamente'})
+                    res.json({message: 'Instrumento eliminado exitosamente'})
                 }
             });
         })

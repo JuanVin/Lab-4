@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from "react";
-import NavBar from './NavBar';
-import apiFunctions from './apiFunctions';
+import apiFunctions from './apiCalls';
 import ItemList from './ItemList';
 import Instrumento from "../models/instrumentos";
 
@@ -16,31 +15,25 @@ function InstrumentList() {
     }, []);
 
     let getFetchData = async () => {
-        let fetchData:Instrumento[] = await apiFunctions.getInstruments()
+        let fetchData: Instrumento[] = await apiFunctions.getInstruments()
         setIsLoading(false)
         setInstrumento(fetchData)
-    } 
+    }
     if (isLoading) {
         return (
             <>
-                <body style={{ backgroundColor: "#ededed" }}>
-                    <NavBar></NavBar>
-                    <div className="container" style={{ display: "flex", justifyContent: "center" }}>
-                        <h1>Loading...</h1>
-                    </div>
-                </body>
+
+                <h1>Loading...</h1>
+
             </>
         );
     }
     return (
+        <>
 
-        <body style={{ backgroundColor: "#ededed" }}>
-            <NavBar></NavBar>
-            <div className='container' style={{ display: "flex", justifyContent: "center"}}>
-                <ItemList instrumentos={instrumentos}></ItemList>
-            </div>
-        </body>
+            <ItemList instrumentos={instrumentos}></ItemList>
 
+        </>
     );
 }
 

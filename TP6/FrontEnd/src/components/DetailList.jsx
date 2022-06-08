@@ -1,6 +1,7 @@
 import { Row, Col, Button, Table, Image } from 'react-bootstrap'
 
 function DetailList( {data} ) {
+    console.log(data)
     function getPrice(type) {
         if (type === "G") {
             return <p style={{ color: "green" }}><Image src={process.env.PUBLIC_URL + "/img/" + "camion.png"}></Image> Envío gratis a todo el país</p>

@@ -11,6 +11,7 @@ class Instrumento {
         this.costoEnvio = "";
         this.cantidadVendida = "";
         this.descripcion = "";
+        this.activo = true;
         this.id = instrumento.id;
         this.instrumento = instrumento.instrumento;
         this.marca = instrumento.marca;
@@ -20,6 +21,7 @@ class Instrumento {
         this.costoEnvio = instrumento.costoEnvio;
         this.cantidadVendida = instrumento.cantidadVendida;
         this.descripcion = instrumento.descripcion;
+        this.activo = instrumento.activo;
     }
 }
 exports.default = Instrumento;

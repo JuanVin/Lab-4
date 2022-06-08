@@ -15,7 +15,7 @@ exports.controller = {
                 return;
             }
             console.log('MySQL Connection: ', connection.threadId);
-            connection.query('SELECT * FROM instrumento limit 10', (err, results) => {
+            connection.query('SELECT * FROM instrumento WHERE activo = 1', (err, results) => {
                 if (err)
                     console.error(err);
                 let instrumento = [];
@@ -47,9 +47,8 @@ exports.controller = {
         });
     }),
     createInstrument: (req, res) => {
-        const { apellido, nombre, dni, sector, fecha_ingreso, activo } = req.body;
-        var values = [apellido, nombre, dni, sector, fecha_ingreso, activo];
-        console.log(values);
+        const { instrumento, marca, modelo, precio, descripcion, activo } = req.body;
+        var values = [instrumento, marca, modelo, precio, descripcion, activo];
         mysqldb_1.pool.getConnection((err, connection) => {
             if (err) {
                 console.error(err);
@@ -57,7 +56,7 @@ exports.controller = {
                 return;
             }
             else {
-                let sql = 'INSERT INTO employees (apellido, nombre, dni, sector, fecha_ingreso, activo) VALUES (?, ?, ?, ?, ?, ?)';
+                let sql = 'INSERT INTO instrumento (instrumento, marca, modelo, precio, descripcion, activo) VALUES (?, ?, ?, ?, ?, ?)';
                 connection.query(sql, values, (err, results) => {
                     if (err) {
                         console.error(err);
@@ -71,8 +70,9 @@ exports.controller = {
         });
     },
     updateInstrument: (req, res) => {
-        const { legajo, apellido, nombre, dni, sector, fecha_ingreso, activo } = req.body;
-        var values = [apellido, nombre, dni, sector, fecha_ingreso, activo, legajo];
+        console.log(req.body);
+        const { id, instrumento, marca, modelo, precio, descripcion } = req.body;
+        var values = [instrumento, marca, modelo, precio, descripcion, id];
         mysqldb_1.pool.getConnection((err, connection) => {
             if (err) {
                 console.error(err);
@@ -80,7 +80,7 @@ exports.controller = {
                 return;
             }
             else {
-                let sql = 'UPDATE employees SET apellido=?, nombre=?, dni=?, sector=?, fecha_ingreso=?, activo=? WHERE legajo=?';
+                let sql = 'UPDATE instrumento SET instrumento=?, marca=?, modelo=?, precio=?, descripcion=? WHERE id=?';
                 connection.query(sql, values, (err, results) => {
                     if (err) {
                         console.error(err);
@@ -94,7 +94,8 @@ exports.controller = {
         });
     },
     deleteInstrument: (req, res) => {
-        let empId = req.params.id;
+        console.log("asdads");
+        let insId = req.params.id;
         mysqldb_1.pool.getConnection((err, connection) => {
             if (err) {
                 console.log(err);
@@ -102,13 +103,12 @@ exports.controller = {
                 return;
             }
             console.log('MySQL Connection: ', connection.threadId);
-            connection.query('DELETE FROM employees WHERE legajo = ?', [empId], (err, results) => {
+            connection.query('UPDATE instrumento SET activo = 0 WHERE id = ?', [insId], (err, results) => {
                 if (err) {
-                    console.error(err);
-                    res.json({ message: 'Error al eliminar un empleado' });
+                    res.json({ message: 'Error al eliminar un instrumento' });
                 }
                 else {
-                    res.json({ message: 'Empleajo eliminado exitosamente' });
+                    res.json({ message: 'Instrumento eliminado exitosamente' });
                 }
             });
         });
