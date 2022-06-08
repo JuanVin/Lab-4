@@ -16,7 +16,6 @@ async function Home() {
         try {
             const response = await fetch('localhost:3000/instruments');
             if (response.ok) {
-                console.log('Todo bien');
                 getInstrumento(response.json())
                 setIsLoading(false)
             } else {

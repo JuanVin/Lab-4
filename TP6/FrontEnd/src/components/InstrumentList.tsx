@@ -12,7 +12,7 @@ function InstrumentList() {
 
     useEffect(() => {
         getFetchData()
-    }, []);
+    }, [isLoading]);
 
     let getFetchData = async () => {
         let fetchData: Instrumento[] = await apiFunctions.getInstruments()
