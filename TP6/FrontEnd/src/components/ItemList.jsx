@@ -5,6 +5,7 @@ import apiFunctions from './apiCalls';
 
 function ItemList({ instrumentos }) {
     const [_instrumentos, setInstrumentos] = useState(instrumentos)
+    console.log(instrumentos)
     let navigate  = useNavigate()
     let instrumentList = []
     function getPrice(type) {

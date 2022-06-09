@@ -30,9 +30,7 @@ function InstrumentList() {
     }
     return (
         <>
-
             <ItemList instrumentos={instrumentos}></ItemList>
-
         </>
     );
 }

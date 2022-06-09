@@ -13,7 +13,7 @@ const App = () => {
       <div className='container' style={{ display: "flex", justifyContent: "center" }}>
         <Router>
           <Routes>
-            <Route path="/lista" element={<InstrumentList />} />
+            <Route path="/" element={<InstrumentList />} />
             <Route path="/lista/:id" element={<InstrumentDetail />} />
             <Route path="/nuevo" element={<UpdateForm />} />
             <Route path="/actualizar/:id" element={<UpdateForm />} />
