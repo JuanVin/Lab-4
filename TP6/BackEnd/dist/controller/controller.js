@@ -105,10 +105,10 @@ exports.controller = {
             console.log('MySQL Connection: ', connection.threadId);
             connection.query('UPDATE instrumento SET activo = 0 WHERE id = ?', [insId], (err, results) => {
                 if (err) {
-                    res.json({ message: 'Error al eliminar un instrumento' });
+                    res.status(400).json({ message: 'Error al eliminar un instrumento' });
                 }
                 else {
-                    res.json({ message: 'Instrumento eliminado exitosamente' });
+                    res.status(200).json({ message: 'Instrumento eliminado exitosamente' });
                 }
             });
         });
