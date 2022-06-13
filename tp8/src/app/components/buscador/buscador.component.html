@@ -1,0 +1,6 @@
+<h1>Buscando: {{termino}} </h1>
+
+<div class="card-deck">
+    <app-iteminstrumento *ngFor="let instrumentolocal of instrumentosArr; let i = index" [instrumentoaux]="instrumentolocal" [index]="instrumentolocal.id">
+    </app-iteminstrumento>
+</div>

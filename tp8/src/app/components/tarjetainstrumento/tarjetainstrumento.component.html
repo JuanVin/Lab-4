@@ -1,0 +1,19 @@
+<!--    <div class="card-deck">
+    <div class="card" *ngFor="let ins of instrumentosArr; let i = index" style="max-width: 25%; padding: 10px;">
+        <img class="card-img-top" src="assets/images/{{ins.imagen}}" alt="Card image cap"
+            style="max-height: 150px;">
+        <div class="card-body">
+            <h5 class="card-title">{{ins.marca}}</h5>
+            <h5 class="card-title">{{ins.instrumento}}</h5>
+            <p class="card-text">$ {{ins.precio}}</p>
+        </div>
+        <div class="card-footer" style="text-align: center;">
+            <button (click)="verInstrumento(ins.id)" class="btn btn-primary" style="width: 90%;">Detalle</button>
+        </div>
+    </div>
+</div> -->
+<div class="card-deck">
+    <app-iteminstrumento (instrumentoSeleccionado)="verInstrumento($event)"
+    *ngFor="let instrumentolocal of instrumentosArr; let i = index" [instrumentoaux]="instrumentolocal" [index]="instrumentolocal.id">
+    </app-iteminstrumento>
+</div>

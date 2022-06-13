@@ -1,0 +1,26 @@
+<div style="padding-left: 30%; padding-right: 30%; padding-top:1%; padding-bottom: 1%;">
+    <div class="row">
+        <div class="col" align="center" justify="center">
+            <br>
+            <h6>{{ instrumentoaux.cantidadVendida }} vendidos</h6>
+
+            <button (click)="verInstrumento()" style="padding: 0; border: none; background: none;">
+
+                <img src="assets/images/{{instrumentoaux.imagen}}" style="max-width: 160px;" />
+            </button>
+            <br /><br />
+        </div>
+        <div class="col" cols="6">
+            <br />
+            <h5>{{ instrumentoaux.instrumento }}</h5>
+            <h4>$ {{ instrumentoaux.precio }}</h4>
+            <span v-if="instrumentoaux.costoEnvio === 'G'">
+                <h6> <img src='assets/images/camion.png' alt='camion' />Envío gratis a todo el país</h6>
+            </span>
+            <span v-else>
+                <p><img src='assets/images/camion.png' alt='camion' />Costo de envío: ${{ instrumentoaux.costoEnvio }}</p>
+            </span>
+
+        </div>
+    </div>
+</div>
